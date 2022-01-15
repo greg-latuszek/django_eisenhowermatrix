@@ -1,5 +1,12 @@
 <h3>Eisenhower Matrix tasks</h3>
 
+<form>
+    <h4>Create new:</h4>
+    {{form}}
+    <input type="submit" name="CreateTask">
+</form>
+
+<h4>All existing:</h4>
 {% for task in tasks %}
     <div>
         <p>{{task}}</p>
