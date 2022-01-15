@@ -35,3 +35,10 @@ def update_task(request, pk):
 
     context = {'form': form}
     return render(request, 'tasks/update_task.html', context)
+
+
+def delete_task(request, pk):
+    item = Task.objects.get(id=pk)
+
+    context = {'item': item}
+    return render(request, 'tasks/delete.html', context)

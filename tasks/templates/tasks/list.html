@@ -10,7 +10,10 @@
 <h4>All existing:</h4>
 {% for task in tasks %}
     <div>
-        <p>{{task}} <a href="{% url 'update_task' task.id %}">Update</a></p>
+        <p>{{task}}
+            <a href="{% url 'update_task' task.id %}">Update</a>
+            <a href="{% url 'delete_task' task.id %}">Delete</a>
+        </p>
     </div>
 
 {% endfor %}
