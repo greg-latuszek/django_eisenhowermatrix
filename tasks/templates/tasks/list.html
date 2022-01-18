@@ -4,10 +4,9 @@
     <h3>Eisenhower Matrix tasks</h3>
 
     <form method="POST" action="/">
-        <h4>Create new:</h4>
         {% csrf_token %}
         {{form.name}} Important:{{form.important}} Urgent:{{form.urgent}}
-        <input type="submit" name="CreateTask">
+        <input type="submit" name="CreateTask" value="Create">
     </form>
 
     <table class="table table-hover">

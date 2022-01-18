@@ -7,4 +7,7 @@ class TaskForm(forms.ModelForm):
 
     class Meta:
         model = Task
-        fields = '__all__'
+        fields = '__all__'  # placeholder="new task"
+        widgets = {
+            'name': forms.TextInput(attrs={'placeholder': 'new task'}),
+        }
