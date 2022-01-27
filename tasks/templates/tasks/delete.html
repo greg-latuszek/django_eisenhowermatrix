@@ -1,3 +1,9 @@
+{% extends 'base.html' %}
+
+{% block nav-style %}navbar-expand-lg navbar-dark bg-danger{% endblock nav-style%}
+
+{% block content %}
+
 <a>Are you sure you want to delete "{{item}}"?</a>
 
 <a href="{% url 'tasks_list' %}">Cancel</a>
@@ -6,3 +12,5 @@
     {% csrf_token %}
     <input type="submit" name="Confirm">
 </form>
+
+{% endblock content %}
