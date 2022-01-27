@@ -15,8 +15,10 @@
 
     <form method="POST" action="/">
         {% csrf_token %}
-        {{form.name}} Important:{{form.important}} Urgent:{{form.urgent}}
-        <input class="btn btn-info btn-sm" type="submit" name="CreateTask" value="Create">
+        <div class="form-group form-control-sm">
+            {{form.name}} Important:{{form.important}} Urgent:{{form.urgent}}
+            <input class="btn btn-info btn-sm" type="submit" name="CreateTask" value="Create">
+        </div>
     </form>
 
     <table class="table table-hover">
