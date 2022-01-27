@@ -18,7 +18,8 @@ def index(request):
             form.save()  # will write to DB
         return redirect('/')
 
-    context = {'tasks': tasks, 'form': form}
+    view_variant = request.GET.get('view', 'table')
+    context = {'tasks': tasks, 'form': form, 'view': view_variant}
     return render(request, 'tasks/list.html', context)
 
 
