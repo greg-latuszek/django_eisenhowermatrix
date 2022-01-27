@@ -16,7 +16,8 @@ def index(request):
         form = TaskForm(request.POST)
         if form.is_valid():
             form.save()  # will write to DB
-        return redirect('/')
+        view_variant = request.POST["view_variant"]  # preserve presentation layout
+        return redirect(f'/?view={view_variant}')
 
     view_variant = request.GET.get('view', 'table')
     context = {'tasks': tasks, 'form': form, 'view': view_variant}
