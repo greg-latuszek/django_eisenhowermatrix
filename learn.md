@@ -9,5 +9,10 @@
    * then you perform migrations via `python manage.py migrate`
       * it changes just DB and not project files (`db.sqlite3` should not be under source control)
 
+# Creating skeleton code
+* each functional part should be treated as app -> one app == one functionality
+   * `python manage.py startapp tasks` - handling tasks
+   * `python manage.py startapp accounts` - handling users registration/login
+
 # Running
 * start django via `python manage.py runserver`
