@@ -57,6 +57,7 @@
                     <a class="nav-item nav-link ms-auto" href="{% url 'logout' %}">Log Out {{ user.username }}</a>
                     {% else %}
                     <a class="nav-item  nav-link ms-auto" href="{% url 'login' %}">Log In</a>
+                    <a class="nav-item  nav-link ms-auto" href="{% url 'signup' %}">Register</a>
                     {% endif %}
                 </div>
             </div>
