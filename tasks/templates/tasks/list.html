@@ -27,7 +27,8 @@
         <tbody>
 
             {% for task in tasks %}
-            {% if user.is_authenticated and user.username == task.author.username or not user.is_authenticated %}
+            {% if user.is_authenticated %}
+            {% if user.username == task.author.username or user.is_superuser %}
             <tr>
                 <td>
                     {% if task.completed == True %}
@@ -77,6 +78,7 @@
                 </td>
             </tr>
             {% endif %}
+            {% endif %}
             {% endfor %}
 
         </tbody>
@@ -85,7 +87,8 @@
     {% elif view == "compact" %}
 
     {% for task in tasks %}
-    {% if user.is_authenticated and user.username == task.author.username or not user.is_authenticated %}
+    {% if user.is_authenticated %}
+    {% if user.username == task.author.username %}
     <div>
         <a class="btn btn-sm btn-outline-primary" href="{% url 'update_task' task.id %}">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="deepskyblue" class="bi bi-pencil-fill" viewBox="0 0 16 16">
@@ -125,6 +128,7 @@
 
     </div>
     {% endif %}
+    {% endif %}
     {% endfor %}
 
     {% elif view == "matrix" %}
@@ -132,7 +136,8 @@
         <div class="row row-cols-2">
             <div class="col bg-danger    text-dark"  class="important-urgent">important and urgent
                 {% for task in tasks %}
-                {% if user.is_authenticated and user.username == task.author.username or not user.is_authenticated %}
+                {% if user.is_authenticated %}
+                {% if user.username == task.author.username  %}
                 {% if task.important == True and task.urgent == True %}
                 <div class="row">
                     <div>
@@ -155,11 +160,13 @@
                 </div>
                 {% endif %}
                 {% endif %}
+                {% endif %}
                 {% endfor %}
             </div>
             <div class="col bg-success   text-white" class="important-nonurgent"> important but not urgent
                 {% for task in tasks %}
-                {% if user.is_authenticated and user.username == task.author.username or not user.is_authenticated %}
+                {% if user.is_authenticated %}
+                {% if user.username == task.author.username %}
                 {% if task.important == True and task.urgent == False %}
                 <div class="row">
                     <div>
@@ -182,11 +189,13 @@
                 </div>
                 {% endif %}
                 {% endif %}
+                {% endif %}
                 {% endfor %}
             </div>
             <div class="col bg-warning   text-dark"  class="nonimportant-urgent">not important but urgent
                 {% for task in tasks %}
-                {% if user.is_authenticated and user.username == task.author.username or not user.is_authenticated %}
+                {% if user.is_authenticated %}
+                {% if user.username == task.author.username %}
                 {% if task.important == False and task.urgent == True %}
                 <div class="row">
                     <div>
@@ -209,11 +218,13 @@
                 </div>
                 {% endif %}
                 {% endif %}
+                {% endif %}
                 {% endfor %}
             </div>
             <div class="col bg-secondary text-white" class="nonimportant-norurgent">not important nor urgent
                 {% for task in tasks %}
-                {% if user.is_authenticated and user.username == task.author.username or not user.is_authenticated %}
+                {% if user.is_authenticated %}
+                {% if user.username == task.author.username %}
                 {% if task.important == False and task.urgent == False %}
                 <div class="row">
                     <div>
@@ -234,6 +245,7 @@
                     {% endif %}
                     </div>
                 </div>
+                {% endif %}
                 {% endif %}
                 {% endif %}
                 {% endfor %}
