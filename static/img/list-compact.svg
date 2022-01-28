@@ -1,0 +1,18 @@
+<svg width="20" height="20" xmlns="http://www.w3.org/2000/svg">
+ <g>
+  <title>Layer 1</title>
+  <g id="svg_5">
+   <rect stroke-width="0" id="svg_3" height="4" width="4" y="8.32061" x="0" stroke="#000" fill="#ffff00"/>
+   <rect stroke-width="0" id="svg_4" height="4" width="10" y="8.32061" x="10" stroke="#000" fill="#ffff00"/>
+  </g>
+  <g id="svg_6">
+   <rect stroke-width="0" id="svg_1" height="4" width="4" y="0" x="0" stroke="#000" fill="#ffff00"/>
+   <rect stroke-width="0" id="svg_2" height="4" width="10" y="0" x="10" stroke="#000" fill="#ffff00"/>
+  </g>
+  <g id="svg_9">
+   <rect stroke-width="0" id="svg_7" height="4" width="4" y="15.9542" x="0" stroke="#000" fill="#ffff00"/>
+   <rect stroke-width="0" id="svg_8" height="4" width="10" y="15.9542" x="10" stroke="#000" fill="#ffff00"/>
+  </g>
+ </g>
+
+</svg>

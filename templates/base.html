@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -48,9 +49,15 @@
 
             <div class="collapse navbar-collapse">
                 <div class="navbar-nav">
-                    <a class="nav-item nav-link active" href="{% url 'tasks_list'%}?view=table">Table <span class="sr-only">(current)</span></a>
-                    <a class="nav-item nav-link" href="{% url 'tasks_list'%}?view=compact">Compact</a>
-                    <a class="nav-item nav-link" href="{% url 'tasks_list'%}?view=matrix">Eisenhower Matrix</a>
+                    <a class="nav-item nav-link active" href="{% url 'tasks_list'%}?view=table">
+                        <img class="nav-item nav-link img-responsive" src="{% static 'img/table.svg' %}">
+                    </a>
+                    <a class="nav-item nav-link navbar-brand" href="{% url 'tasks_list'%}?view=compact">
+                        <img class="nav-item nav-link img-responsive" src="{% static 'img/list-compact.svg' %}">
+                    </a>
+                    <a class="nav-item nav-link navbar-brand" href="{% url 'tasks_list'%}?view=matrix">
+                        <img class="nav-item nav-link img-responsive" src="{% static 'img/eisenhower.svg' %}">
+                    </a>
                 </div>
                 <div class="navbar-nav ms-auto">
                     {% if user.is_authenticated %}
