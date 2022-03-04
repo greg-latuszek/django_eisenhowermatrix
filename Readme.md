@@ -51,7 +51,7 @@ EMAIL_HOST = '127.0.0.1'
 EMAIL_PORT = 1025
 ```
 After clicking navbar's `Forgot Password`, providing user's email and clicking `Reset my password` you will find
-reset password email displayed at `http://127.0.0.1:8025/`.
+reset password email displayed at http://127.0.0.1:8025/.
 Go there and copy password reset link. Paste it in browser, fill new password, confirm same
 and click `Change my password`.
 
