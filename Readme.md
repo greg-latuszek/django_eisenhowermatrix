@@ -42,6 +42,19 @@ reset password email dumped inside folder `sent_emails`.
 Go there and copy password reset link. Paste it in browser, fill new password, confirm same
 and click `Change my password`.
 
+### development variant 2 (using MailHog)
+[Run MailHog in docker](devenv.md#mailhog).
+Then your `settings.py` need:
+```python
+EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
+EMAIL_HOST = '127.0.0.1'
+EMAIL_PORT = 1025
+```
+After clicking navbar's `Forgot Password`, providing user's email and clicking `Reset my password` you will find
+reset password email displayed at `http://127.0.0.1:8025/`.
+Go there and copy password reset link. Paste it in browser, fill new password, confirm same
+and click `Change my password`.
+
 ### production variant
 Comment out lines from above "development variant" and uncomment (if commented out) following inside `settings.py`:
 ```python
