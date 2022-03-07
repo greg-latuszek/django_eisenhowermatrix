@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'djcelery_email',
 
     'tasks',
     'accounts',
@@ -131,7 +132,8 @@ LOGOUT_REDIRECT_URL = 'tasks_list'
 
 # EMAIL_BACKEND = "django.core.mail.backends.filebased.EmailBackend"
 # EMAIL_FILE_PATH = str(BASE_DIR.joinpath('sent_emails'))
-EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
+# EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
+EMAIL_BACKEND = 'djcelery_email.backends.CeleryEmailBackend'
 EMAIL_HOST = '127.0.0.1'
 EMAIL_PORT = 1025
 # EMAIL_HOST = 'smtp.sendgrid.net'
