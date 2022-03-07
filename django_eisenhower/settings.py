@@ -140,3 +140,6 @@ EMAIL_PORT = 1025
 # EMAIL_PORT = 587
 # EMAIL_USE_TLS = True
 DEFAULT_FROM_EMAIL = os.environ.get("ADMIN_EMAIL", '')
+
+# Celery Configuration Options
+CELERY_BROKER_URL = 'amqp://localhost'

@@ -48,3 +48,10 @@ def delete_task(request, pk):
 
     context = {'item': item}
     return render(request, 'tasks/delete.html', context)
+
+
+def show_primes(request, x):
+    from .tasks import print_primes
+
+    print_primes.delay(x)
+    return redirect('/')
