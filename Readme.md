@@ -90,9 +90,9 @@ DEFAULT_FROM_EMAIL = os.environ.get("ADMIN_EMAIL", '')
 ## usage
 ### see all tasks
 You have 3 variants of tasks list view:
-* table view ![tv](static/img/table.svg) - shows all details in table-list form
-* condensed list view ![tv](static/img/list-compact.svg) 
-* eisenhower matrix view ![tv](static/img/eisenhower.svg) 
+* table view ![tv](django/static/img/table.svg) - shows all details in table-list form
+* condensed list view ![tv](django/static/img/list-compact.svg) 
+* eisenhower matrix view ![tv](django/static/img/eisenhower.svg) 
 
 You select them via clicking proper icon in navbar.
 
