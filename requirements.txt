@@ -1,0 +1,3 @@
+celery
+Django
+django-celery-email

@@ -1,0 +1,30 @@
+version: "3.9"
+services:
+  web:
+    build: .  # act on Dockerfile in current dir
+    ports:
+      - "8007:8000"
+    environment:
+      - PYTHONDEBUG
+      - DJANGO_SUPERUSER_USERNAME  # folowing 3 envvars for: python manage.py createsuperuser --noinput
+      - DJANGO_SUPERUSER_EMAIL
+      - DJANGO_SUPERUSER_PASSWORD
+      - PYTHONUNBUFFERED=1 # no buffering stdout/stderr so Django logs are real time into container console
+      - PYTHONDONTWRITEBYTECODE=1  # no .pyc
+#  mail:
+#    image: "mailhog:v1.0.1"
+#    ports:
+#      - "1025:1025"
+#      - "8025:8025"
+#  rabitmq:
+#    image: "rabbitmq:3.9.13-management"
+#    container_name: 'rabbitmq'
+#    ports:
+#      - "5672:5672"    # queue
+#      - "15672:15672"  # Web UI: http://container-ip:15672
+#    networks:
+#      - eisenhower_net
+
+#networks:
+#  eisenhower_net:
+#    driver: bridge

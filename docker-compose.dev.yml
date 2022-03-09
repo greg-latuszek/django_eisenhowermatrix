@@ -1,0 +1,5 @@
+version: "3.9"
+services:
+  web:
+    volumes:
+      - ./django:/code  # instead of copied sources (see Dockerfile) mount development repo
