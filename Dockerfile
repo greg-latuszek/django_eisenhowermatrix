@@ -22,9 +22,7 @@ RUN pip install -r requirements.txt
 EXPOSE 8000
 
 # start server
-#CMD ls -l \
-#    && python manage.py migrate \
-#    && python manage.py createsuperuser --noinput \
-#    && ls -l \
-#    && python manage.py runserver
-CMD python manage.py runserver 0.0.0.0:8000
+CMD python manage.py migrate \
+    && python manage.py createsuperuser --noinput \
+    && python manage.py runserver 0.0.0.0:8000
+#CMD python manage.py runserver 0.0.0.0:8000
