@@ -31,3 +31,15 @@ services:
     ports:
       - "5672:5672"    # queue
       - "15672:15672"  # Web UI: http://container-ip:15672
+#  worker:
+#    build:
+#      context: ./api
+#    hostname: worker
+#    entrypoint: celery
+#    command: -A celery_app.celery worker --loglevel=info
+#    volumes:
+#      - ./api:/app
+#    links:
+#      - redis
+#    depends_on:
+#      - redis
