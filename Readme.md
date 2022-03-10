@@ -61,10 +61,10 @@ Comment out lines from above "development variant" and uncomment (if commented o
 EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
 EMAIL_HOST = 'smtp.sendgrid.net'
 EMAIL_HOST_USER = 'apikey'
-EMAIL_HOST_PASSWORD = os.environ.get("SENDGRID_PASSWORD", '')
+EMAIL_HOST_PASSWORD = os.environ["SENDGRID_PASSWORD"]
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
-DEFAULT_FROM_EMAIL = os.environ.get("ADMIN_EMAIL", '')
+DEFAULT_FROM_EMAIL = os.environ["DJANGO_SUPERUSER_EMAIL"]
 ```
 1. It requires to setup account on https://sendgrid.com/ - "email forwarder" service
 2. Create there integration key: Setup Guide / Integrate / SMTP
@@ -73,7 +73,7 @@ DEFAULT_FROM_EMAIL = os.environ.get("ADMIN_EMAIL", '')
       * for security reasons you won't be able to see API Key there
       * you just need to create new one (for first time or if you forgot old one)
       * then write it down somewhere and put into `SENDGRID_PASSWORD` env var
-4. Put your admin email inside environment variable `ADMIN_EMAIL`
+4. Put your admin email inside environment variable `DJANGO_SUPERUSER_EMAIL`
    * **CAUTION**: double check which email is used for "email forwarding". It doesn't need to be same email which was used to register at SendGrid.
    * go to `https://app.sendgrid.com/settings/sender_auth`
    * find section "Single Sender verification"
