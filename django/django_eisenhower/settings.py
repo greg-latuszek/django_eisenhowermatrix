@@ -135,7 +135,7 @@ LOGOUT_REDIRECT_URL = 'tasks_list'
 # EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
 EMAIL_BACKEND = 'djcelery_email.backends.CeleryEmailBackend'
 EMAIL_HOST = '127.0.0.1'
-EMAIL_PORT = 1025
+EMAIL_PORT = int(os.environ.get("EMAIL_SMTP_PORT", 587))
 # EMAIL_HOST = 'smtp.sendgrid.net'
 # EMAIL_HOST_USER = 'apikey'
 # EMAIL_HOST_PASSWORD = os.environ["SENDGRID_PASSWORD"]
@@ -144,4 +144,4 @@ EMAIL_PORT = 1025
 DEFAULT_FROM_EMAIL = os.environ["DJANGO_SUPERUSER_EMAIL"]
 
 # Celery Configuration Options
-CELERY_BROKER_URL = 'amqp://localhost'
+CELERY_BROKER_URL = os.environ["CELERY_BROKER_URL"]
