@@ -134,10 +134,11 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 LOGIN_REDIRECT_URL = 'tasks_list'
 LOGOUT_REDIRECT_URL = 'tasks_list'
 
-# EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
 EMAIL_BACKEND = 'djcelery_email.backends.CeleryEmailBackend'
-EMAIL_HOST = 'mail'
+CELERY_EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = os.environ["EMAIL_HOST"]
 EMAIL_PORT = int(os.environ.get("EMAIL_SMTP_PORT", 587))
+
 # EMAIL_HOST = 'smtp.sendgrid.net'
 # EMAIL_HOST_USER = 'apikey'
 # EMAIL_HOST_PASSWORD = os.environ["SENDGRID_PASSWORD"]

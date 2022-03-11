@@ -5,7 +5,7 @@ After cloning repo please do initialize underlying database via:
 * `docker compose -f docker-compose.yml -f docker-compose.dev.yml run web python manage.py migrate`
 
 Then you need to create Admin account for that DB
-* do it via: `python manage.py createsuperuser`
+* do it via: `docker compose -f docker-compose.yml -f docker-compose.dev.yml run web python manage.py createsuperuser`
 * it will be available at `<URL>/admin/`
 * it will ask for username, email & password
 * don't use it for any activity inside app !!!

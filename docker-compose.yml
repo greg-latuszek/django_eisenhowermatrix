@@ -17,19 +17,17 @@ services:
       - "8007:8000"
     environment:
       - ALLOWED_HOSTS  # values will come from .env
+      - CELERY_BROKER_URL
+      - DJANGO_SUPERUSER_EMAIL
+      - EMAIL_SMTP_PORT
+      - EMAIL_HOST
       - POSTGRES_DB
+      - POSTGRES_HOST
       - POSTGRES_USER
       - POSTGRES_PASSWORD
-      - POSTGRES_HOST
-      - DB_HOST=db
       - PYTHONDEBUG
-      - DJANGO_SUPERUSER_USERNAME  # folowing 3 envvars for: python manage.py createsuperuser --noinput
-      - DJANGO_SUPERUSER_EMAIL
-      - DJANGO_SUPERUSER_PASSWORD
-      - EMAIL_SMTP_PORT
-      - PYTHONUNBUFFERED=1 # no buffering stdout/stderr so Django logs are real time into container console
       - PYTHONDONTWRITEBYTECODE=1  # no .pyc
-      - CELERY_BROKER_URL
+      - PYTHONUNBUFFERED=1 # no buffering stdout/stderr so Django logs are real time into container console
     depends_on:
       - db  # cannot start if db service is not up and running
       - broker
@@ -43,22 +41,30 @@ services:
       - "8025:8025"
   broker:
     image: "rabbitmq:3.9.13-management"
-#    container_name: 'rabbitmq'
     environment:
       - RABBITMQ_DEFAULT_USER
       - RABBITMQ_DEFAULT_PASS
     ports:
       - "5672:5672"    # queue
       - "15672:15672"  # Web UI: http://container-ip:15672
-#  worker:
-#    build:
-#      context: ./api
-#    hostname: worker
-#    entrypoint: celery
-#    command: -A celery_app.celery worker --loglevel=info
-#    volumes:
-#      - ./api:/app
-#    links:
-#      - redis
-#    depends_on:
-#      - redis
+  worker:
+    build:
+      context: .
+    command: celery -A tasks worker --loglevel=info
+    environment:
+      - ALLOWED_HOSTS  # values will come from .env
+      - CELERY_BROKER_URL
+      - DJANGO_SUPERUSER_EMAIL
+      - EMAIL_SMTP_PORT
+      - EMAIL_HOST
+      - POSTGRES_DB
+      - POSTGRES_HOST
+      - POSTGRES_USER
+      - POSTGRES_PASSWORD
+      - PYTHONDEBUG
+      - PYTHONDONTWRITEBYTECODE=1  # no .pyc
+      - PYTHONUNBUFFERED=1 # no buffering stdout/stderr so Django logs are real time into container console
+    links:
+      - broker
+    depends_on:
+      - broker
