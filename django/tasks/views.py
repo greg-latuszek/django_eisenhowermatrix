@@ -15,7 +15,12 @@ def index(request):
     if request.method == 'POST':
         form = TaskForm(request.POST)
         if form.is_valid():
-            form.save()  # will write to DB
+            # print(dir(form))
+            eisenh_task = form.save(commit=False)  # will not write to DB
+            eisenh_task.author = request.user
+            eisenh_task.save()  # will write to DB
+        else:
+            print(form.errors)
         view_variant = request.POST["view_variant"]  # preserve presentation layout
         return redirect(f'/?view={view_variant}')
 
