@@ -2,8 +2,7 @@
 
 ## before you start
 After cloning repo please do initialize underlying database via:
-* `python manage.py migrate` or 
-* `python3 manage.py migrate`
+* `docker compose -f docker-compose.yml -f docker-compose.dev.yml run web python manage.py migrate`
 
 Then you need to create Admin account for that DB
 * do it via: `python manage.py createsuperuser`
