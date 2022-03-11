@@ -1,11 +1,28 @@
 version: "3.9"
+volumes:
+  postgres_data:
+    driver: local
 services:
+  db:
+    image: postgres
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+    environment:
+      - POSTGRES_DB
+      - POSTGRES_USER
+      - POSTGRES_PASSWORD
   web:
     build: .  # act on Dockerfile in current dir
     ports:
       - "8007:8000"
     environment:
-      - PYTHONDEBUG  # values will come from .env
+      - ALLOWED_HOSTS  # values will come from .env
+      - POSTGRES_DB
+      - POSTGRES_USER
+      - POSTGRES_PASSWORD
+      - POSTGRES_HOST
+      - DB_HOST=db
+      - PYTHONDEBUG
       - DJANGO_SUPERUSER_USERNAME  # folowing 3 envvars for: python manage.py createsuperuser --noinput
       - DJANGO_SUPERUSER_EMAIL
       - DJANGO_SUPERUSER_PASSWORD
@@ -14,9 +31,11 @@ services:
       - PYTHONDONTWRITEBYTECODE=1  # no .pyc
       - CELERY_BROKER_URL
     depends_on:
+      - db  # cannot start if db service is not up and running
       - broker
     links:
       - broker
+      - db
   mail:
     image: "mailhog/mailhog:v1.0.1"
     ports:
