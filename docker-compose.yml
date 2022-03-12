@@ -34,9 +34,6 @@ services:
     depends_on:
       - db  # cannot start if db service is not up and running
       - broker
-    links:
-      - broker
-      - db
   mail:
     image: "mailhog/mailhog:v1.0.1"
     ports:
@@ -55,7 +52,5 @@ services:
       context: .
     command: celery -A tasks worker --loglevel=info
     environment:  *app_envvars
-    links:
-      - broker
     depends_on:
       - broker
