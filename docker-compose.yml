@@ -15,11 +15,11 @@ services:
     build: .  # act on Dockerfile in current dir
     ports:
       - "8007:8000"
-    environment:
+    environment:  &app_envvars
       - ALLOWED_HOSTS  # values will come from .env
       - CELERY_BROKER_URL
       - DJANGO_SUPERUSER_EMAIL
-      - EMAIL_SMTP_PORT
+      - EMAIL_PORT
       - EMAIL_HOST
       - POSTGRES_DB
       - POSTGRES_HOST
@@ -51,19 +51,7 @@ services:
     build:
       context: .
     command: celery -A tasks worker --loglevel=info
-    environment:
-      - ALLOWED_HOSTS  # values will come from .env
-      - CELERY_BROKER_URL
-      - DJANGO_SUPERUSER_EMAIL
-      - EMAIL_SMTP_PORT
-      - EMAIL_HOST
-      - POSTGRES_DB
-      - POSTGRES_HOST
-      - POSTGRES_USER
-      - POSTGRES_PASSWORD
-      - PYTHONDEBUG
-      - PYTHONDONTWRITEBYTECODE=1  # no .pyc
-      - PYTHONUNBUFFERED=1 # no buffering stdout/stderr so Django logs are real time into container console
+    environment:  *app_envvars
     links:
       - broker
     depends_on:
