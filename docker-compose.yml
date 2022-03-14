@@ -11,6 +11,8 @@ services:
       - POSTGRES_DB
       - POSTGRES_USER
       - POSTGRES_PASSWORD
+    ports:
+      - "5432:5432"  # need to open DB outside container to let DBeaver access it
   web:
     build: .  # act on Dockerfile in current dir
     ports:
