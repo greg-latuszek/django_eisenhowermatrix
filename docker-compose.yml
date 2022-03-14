@@ -2,15 +2,23 @@ version: "3.9"
 volumes:
   postgres_data:
     driver: local
+secrets:
+  db_login:
+    file: ./db_login.txt
+  db_password:
+    file: ./db_password.txt
 services:
   db:
     image: postgres
     volumes:
       - postgres_data:/var/lib/postgresql/data/
+    secrets:
+      - db_login
+      - db_password
     environment:
       - POSTGRES_DB
-      - POSTGRES_USER
-      - POSTGRES_PASSWORD
+      - POSTGRES_USER_FILE=/run/secrets/db_login
+      - POSTGRES_PASSWORD_FILE=/run/secrets/db_password
     ports:
       - "5432:5432"  # need to open DB outside container to let DBeaver access it
   web:
