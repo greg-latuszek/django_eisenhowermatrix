@@ -5,3 +5,10 @@ services:
     volumes:
       - ./django:/code  # instead of copied sources (see Dockerfile) mount development repo
       - ./db.sqlite3:/code/db.sqlite3  # reuse development DB
+  pgadmin:
+    image: dpage/pgadmin4
+    environment:
+      - PGADMIN_DEFAULT_EMAIL
+      - PGADMIN_DEFAULT_PASSWORD
+    ports:
+      - "5050:80"
