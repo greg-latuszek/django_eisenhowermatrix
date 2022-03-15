@@ -2,6 +2,8 @@ from django import forms
 from django.contrib.auth.forms import UserCreationForm, PasswordResetForm
 from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
+from django.template import loader
+from .tasks import do_send_mail
 
 
 class NewUserForm(UserCreationForm):
@@ -36,6 +38,12 @@ class QueuedPasswordResetForm(PasswordResetForm):
         to_email,
         html_email_template_name=None,
     ):
-        print(f">>>>>>>>>>>>> ------- >>>>>> send_mail(from: {from_email}, to: {to_email}")
-        super().send_mail(subject_template_name, email_template_name,
-                          context, from_email, to_email, html_email_template_name)
+        """
+        Enqueue email sending job via Celery.
+        """
+        subject = loader.render_to_string(subject_template_name, context)
+        # Email subject *must not* contain newlines
+        subject = "".join(subject.splitlines())
+        body = loader.render_to_string(email_template_name, context)
+        print(f">>>>>>>--[><]-->>>>>>>>>>>>> Enqueue send_mail(from: {from_email}, to: {to_email}, subject: {subject}")
+        do_send_mail.delay(subject, body, from_email, to_email)

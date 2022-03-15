@@ -1,4 +1,4 @@
 celery
 Django
-django-celery-email
+# django-celery-email
 psycopg2>=2.8
