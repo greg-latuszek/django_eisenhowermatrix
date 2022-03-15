@@ -140,7 +140,8 @@ EMAIL_HOST = os.environ["EMAIL_HOST"]
 EMAIL_PORT = int(os.environ.get("EMAIL_PORT", 587))
 EMAIL_HOST_USER = os.environ["EMAIL_HOST_USER"]
 EMAIL_HOST_PASSWORD = os.environ["EMAIL_HOST_PASSWORD"]
-EMAIL_USE_TLS = os.environ["EMAIL_USE_TLS"]
+EMAIL_USE_SSL = os.environ.get("EMAIL_USE_SSL", "False").lower() in ["true", "yes", "t", "y", "1"]
+EMAIL_USE_TLS = os.environ.get("EMAIL_USE_TLS", "False").lower() in ["true", "yes", "t", "y", "1"]
 DEFAULT_FROM_EMAIL = os.environ["DJANGO_SUPERUSER_EMAIL"]
 
 # Celery Configuration Options
