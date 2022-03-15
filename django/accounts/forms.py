@@ -3,6 +3,7 @@ from django.contrib.auth.forms import UserCreationForm, PasswordResetForm
 from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
 from django.template import loader
+from django.contrib.auth.models import User
 from .tasks import do_send_mail
 
 
@@ -45,5 +46,9 @@ class QueuedPasswordResetForm(PasswordResetForm):
         # Email subject *must not* contain newlines
         subject = "".join(subject.splitlines())
         body = loader.render_to_string(email_template_name, context)
+        if not from_email:
+            superusers_emails = User.objects.filter(is_superuser=True).values_list('email')
+            from_email = superusers_emails[0][0]
+
         print(f">>>>>>>--[><]-->>>>>>>>>>>>> Enqueue send_mail(from: {from_email}, to: {to_email}, subject: {subject}")
         do_send_mail.delay(subject, body, from_email, to_email)
