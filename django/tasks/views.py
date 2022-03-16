@@ -1,10 +1,11 @@
 from django.shortcuts import render, redirect
 # from django.views.generic import ListView, DetailView
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
 
 from .models import Task
 from .forms import TaskForm
-
-# Create your views here.
+from .serializers import TaskSerializer
 
 
 def index(request):
@@ -55,8 +56,20 @@ def delete_task(request, pk):
     return render(request, 'tasks/delete.html', context)
 
 
+# Celery
 def show_primes(request, x):
     from .tasks import print_primes
 
     print_primes.delay(x)
     return redirect('/')
+
+
+# DRF
+@api_view(["GET"])
+def list_tasks(request):
+    tasks = Task.objects.all()
+    serializer = TaskSerializer(tasks, many=True)
+    content = {
+        "tasks": serializer.data,
+    }
+    return Response(content)

@@ -1,4 +1,5 @@
 celery
 Django
+djangorestframework
 # django-celery-email
 psycopg2>=2.8
