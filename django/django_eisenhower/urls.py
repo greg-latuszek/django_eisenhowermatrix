@@ -18,12 +18,17 @@ from django.urls import path, include
 from django.views.generic.base import RedirectView
 from django.contrib.staticfiles.storage import staticfiles_storage
 
+(accounts_module, _, _) = include('accounts.api_urls')
+(tasks_module, _, _) = include('tasks.api_urls')
+api_paths = accounts_module.urlpatterns[:]
+api_paths.extend(tasks_module.urlpatterns)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('accounts/', include('accounts.urls')),
     path('accounts/', include('django.contrib.auth.urls')),
     path('', include('tasks.urls')),
+    path('api/', include(api_paths)),
     path(
         "favicon.ico",
         RedirectView.as_view(url=staticfiles_storage.url("img/favicon.ico")),
