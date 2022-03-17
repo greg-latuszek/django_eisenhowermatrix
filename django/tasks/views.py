@@ -69,4 +69,4 @@ class TasksViewSet(viewsets.ModelViewSet):
     permission_classes = [IsAuthenticated]
 
     def get_queryset(self):
-        return Task.objects.all()
+        return Task.objects.filter(author=self.request.user)
