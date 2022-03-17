@@ -17,6 +17,10 @@ from django.contrib import admin
 from django.urls import path, include
 from django.views.generic.base import RedirectView
 from django.contrib.staticfiles.storage import staticfiles_storage
+from rest_framework_simplejwt.views import (
+    TokenObtainPairView,
+    TokenRefreshView,
+)
 
 (accounts_module, _, _) = include('accounts.api_urls')
 (tasks_module, _, _) = include('tasks.api_urls')
@@ -28,6 +32,8 @@ urlpatterns = [
     path('accounts/', include('accounts.urls')),
     path('accounts/', include('django.contrib.auth.urls')),
     path('', include('tasks.urls')),
+    path('token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
+    path('token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
     path('api/', include(api_paths)),
     path(
         "favicon.ico",

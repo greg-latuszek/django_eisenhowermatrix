@@ -1,5 +1,7 @@
 celery
 Django
 djangorestframework
+djangorestframework-simplejwt
+django-filter
 # django-celery-email
 psycopg2>=2.8

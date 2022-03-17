@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from rest_framework import viewsets
+from rest_framework.permissions import IsAuthenticated
 
 from .models import Task
 from .forms import TaskForm
@@ -65,6 +66,7 @@ def show_primes(request, x):
 # DRF
 class TasksViewSet(viewsets.ModelViewSet):
     serializer_class = TaskSerializer
+    permission_classes = [IsAuthenticated]
 
     def get_queryset(self):
         return Task.objects.all()
