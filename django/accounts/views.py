@@ -19,4 +19,7 @@ class UsersViewSet(viewsets.ModelViewSet):
     permission_classes = [IsAuthenticated]
 
     def get_queryset(self):
-        return User.objects.filter(username=self.request.user)
+        if self.request.user.is_superuser:
+            return User.objects.all()
+        else:
+            return User.objects.filter(username=self.request.user)

@@ -69,4 +69,7 @@ class TasksViewSet(viewsets.ModelViewSet):
     permission_classes = [IsAuthenticated]
 
     def get_queryset(self):
-        return Task.objects.filter(author=self.request.user)
+        if self.request.user.is_superuser:
+            return Task.objects.all()
+        else:
+            return Task.objects.filter(author=self.request.user)
