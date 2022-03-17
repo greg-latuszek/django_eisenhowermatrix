@@ -35,8 +35,5 @@ urlpatterns = [
     path('token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
     path('token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
     path('api/', include(api_paths)),
-    path(
-        "favicon.ico",
-        RedirectView.as_view(url=staticfiles_storage.url("img/favicon.ico")),
-    ),
+    path("favicon.ico", RedirectView.as_view(url=staticfiles_storage.url("img/favicon.ico"))),
 ]
