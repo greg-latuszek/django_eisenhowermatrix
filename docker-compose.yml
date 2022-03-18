@@ -24,7 +24,7 @@ services:
   web:
     build: .  # act on Dockerfile in current dir
     ports:
-      - "8007:8000"
+      - "8000"
     environment:  &app_envvars
       - ALLOWED_HOSTS  # values will come from .env
       - CELERY_BROKER_URL
@@ -64,3 +64,9 @@ services:
     environment:  *app_envvars
     depends_on:
       - broker
+  nginx:
+    build: ./nginx
+    ports:
+      - "8007:80"
+    depends_on:
+      - web
