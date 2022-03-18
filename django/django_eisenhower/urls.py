@@ -21,11 +21,26 @@ from rest_framework_simplejwt.views import (
     TokenObtainPairView,
     TokenRefreshView,
 )
+from rest_framework.routers import DefaultRouter
 
-(accounts_module, _, _) = include('accounts.api_urls')
-(tasks_module, _, _) = include('tasks.api_urls')
-api_paths = accounts_module.urlpatterns[:]
-api_paths.extend(tasks_module.urlpatterns)
+
+def combine_routers(target_router, application_names):
+    """
+    Joint data registered inside routers of provided applications list.
+
+    It expects convention:
+    - each application has "url.py" module
+    - this module has Router instance named "router"
+    """
+    for app_name in application_names:
+        (_module, _, _) = include(f'{app_name}.urls')
+        for prefix, viewset, basename in _module.router.registry:
+            target_router.register(prefix, viewset, basename)
+    return target_router
+
+
+router = DefaultRouter()
+router = combine_routers(target_router=router, application_names=['accounts', 'tasks'])
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -34,6 +49,6 @@ urlpatterns = [
     path('', include('tasks.urls')),
     path('token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
     path('token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
-    path('api/', include(api_paths)),
+    path('api/', include(router.urls)),
     path("favicon.ico", RedirectView.as_view(url=staticfiles_storage.url("img/favicon.ico"))),
 ]
