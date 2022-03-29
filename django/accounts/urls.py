@@ -1,6 +1,7 @@
-from django.urls import path
-from django.contrib.auth import views as auth_views
 from rest_framework.routers import SimpleRouter
+
+from django.contrib.auth import views as auth_views
+from django.urls import path
 
 from . import views
 from .forms import QueuedPasswordResetForm

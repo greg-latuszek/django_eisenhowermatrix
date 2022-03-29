@@ -1,9 +1,10 @@
-from django.shortcuts import render, redirect
 from rest_framework import viewsets
 from rest_framework.permissions import IsAuthenticated
 
-from .models import Task
+from django.shortcuts import redirect, render
+
 from .forms import TaskForm
+from .models import Task
 from .serializers import TaskSerializer
 
 
