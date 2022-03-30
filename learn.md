@@ -25,3 +25,12 @@ $ pre-commit install
 pre-commit installed at .git/hooks/pre-commit
 $ pre-commit run --all-files
 ```
+
+# code linters
+```bash
+# .pre-commit-config.yaml
+-   repo: https://github.com/pre-commit/mirrors-isort
+    rev: v5.10.1
+    hooks:
+    -   id: isort
+```
