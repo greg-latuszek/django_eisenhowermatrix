@@ -18,6 +18,7 @@
 * start django via `python manage.py runserver`
 
 # git hooks
+* https://pre-commit.com/
 ```bash
 $ pip install pre-commit
 $ pre-commit sample-config > .pre-commit-config.yaml
@@ -27,6 +28,8 @@ $ pre-commit run --all-files
 ```
 
 # code linters
+* https://pycqa.github.io/isort/
+* https://pycqa.github.io/isort/docs/configuration/pre-commit.html
 ```bash
 # .pre-commit-config.yaml
 -   repo: https://github.com/pre-commit/mirrors-isort
