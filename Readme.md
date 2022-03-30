@@ -10,9 +10,9 @@ Then you need to create Admin account for that DB
 * it will ask for username, email & password
 * don't use it for any activity inside app !!!
    * inside app create different users
-  
+
 ## starting
-* `python manage.py runserver` or 
+* `python manage.py runserver` or
 * `python3 manage.py runserver`
 
 ## registration
@@ -78,10 +78,10 @@ DEFAULT_FROM_EMAIL = os.environ["DJANGO_SUPERUSER_EMAIL"]
    * find section "Single Sender verification"
    * click `Verify a Single Sender` and fill in that form:
       * those fields will map to created email fields
-      * form's field `From Email Address` **MUST BE FILLED WITH ADMIN email** (created above in `before you start`) 
+      * form's field `From Email Address` **MUST BE FILLED WITH ADMIN email** (created above in `before you start`)
       * after submitting form you need to click confirmation inside email send from SendGrid into your Admin-email
    * later on you can check configured senders at `https://app.sendgrid.com/settings/sender_auth/senders`
-      * look for green tick at Verified column 
+      * look for green tick at Verified column
 6. At `Forgot Password` form fill email of app user who wants to change password
    * I'll repeat once more - it may not be admin email
    * check inbox for that email - there will be reset password email
@@ -90,8 +90,8 @@ DEFAULT_FROM_EMAIL = os.environ["DJANGO_SUPERUSER_EMAIL"]
 ### see all tasks
 You have 3 variants of tasks list view:
 * table view ![tv](django/static/img/table.svg) - shows all details in table-list form
-* condensed list view ![tv](django/static/img/list-compact.svg) 
-* eisenhower matrix view ![tv](django/static/img/eisenhower.svg) 
+* condensed list view ![tv](django/static/img/list-compact.svg)
+* eisenhower matrix view ![tv](django/static/img/eisenhower.svg)
 
 You select them via clicking proper icon in navbar.
 
