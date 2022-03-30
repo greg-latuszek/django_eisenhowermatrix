@@ -22,7 +22,7 @@ docker compose version
    * create `docker-compose.yml`
    * `docker compose build`
 * starting at IP:port
-   * `python manage.py runserver 0.0.0.0:8000` 
+   * `python manage.py runserver 0.0.0.0:8000`
 
 ## tricks
 * env variables (including passwords)
@@ -37,9 +37,9 @@ docker compose version
 * jump into specific container of `docker-compose.yml`
    * `docker compose -f docker-compose.yml -f docker-compose.dev.yml run web bash` then you can check `env`
 * stopping containers (leaving containers)
-   * `docker compose -f docker-compose.yml -f docker-compose.dev.yml stop` 
+   * `docker compose -f docker-compose.yml -f docker-compose.dev.yml stop`
 * destroying containers (leaving images)
-   * `docker compose -f docker-compose.yml -f docker-compose.dev.yml down` 
+   * `docker compose -f docker-compose.yml -f docker-compose.dev.yml down`
 
 ## Caution
 * don't use alpine
@@ -50,4 +50,4 @@ docker compose version
    * then new files are created as root
    * and before pushing to repo host ensure that you `sudo chown -R user:group folder`
       * may be done by git hooks
-      * add yourself to sudoers to not be asked for password 
+      * add yourself to sudoers to not be asked for password
