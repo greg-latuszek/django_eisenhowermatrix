@@ -8,9 +8,11 @@ from .tasks import do_send_mail
 
 
 class NewUserForm(UserCreationForm):
-    email = forms.EmailField(required=True,
-                             label='Email',
-                             error_messages={'exists': 'Oops - email already taken'})
+    email = forms.EmailField(
+        required=True,
+        label="Email",
+        error_messages={"exists": "Oops - email already taken"},
+    )
 
     class Meta:
         model = User
@@ -24,9 +26,9 @@ class NewUserForm(UserCreationForm):
         return user
 
     def clean_email(self):
-        if User.objects.filter(email=self.cleaned_data['email']).exists():
-            raise ValidationError(self.fields['email'].error_messages['exists'])
-        return self.cleaned_data['email']
+        if User.objects.filter(email=self.cleaned_data["email"]).exists():
+            raise ValidationError(self.fields["email"].error_messages["exists"])
+        return self.cleaned_data["email"]
 
 
 class QueuedPasswordResetForm(PasswordResetForm):
@@ -47,8 +49,7 @@ class QueuedPasswordResetForm(PasswordResetForm):
         subject = "".join(subject.splitlines())
         body = loader.render_to_string(email_template_name, context)
         if not from_email:
-            superusers_emails = User.objects.filter(is_superuser=True).values_list('email')
-            from_email = superusers_emails[0][0]
+            su_emails = User.objects.filter(is_superuser=True).values_list("email")
+            from_email = su_emails[0][0]
 
-        print(f">>>>>>>--[><]-->>>>>>>>>>>>> Enqueue send_mail(from: {from_email}, to: {to_email}, subject: {subject}")
         do_send_mail.delay(subject, body, from_email, to_email)

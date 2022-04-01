@@ -11,8 +11,8 @@ from .serializers import UserSerializer
 
 class SignUpView(generic.CreateView):
     form_class = NewUserForm
-    success_url = reverse_lazy('login')
-    template_name = 'registration/signup.html'
+    success_url = reverse_lazy("login")
+    template_name = "registration/signup.html"
 
 
 # DRF
