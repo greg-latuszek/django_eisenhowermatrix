@@ -4,7 +4,9 @@ services:
     ports:
       - 5433:5432
   web:
-    command: python manage.py runserver 0.0.0.0:8000
+    # uncomment to change from gunicorn (prod.default in Dockerfile)
+    # command: python manage.py runserver 0.0.0.0:8000
+    command: gunicorn -b 0.0.0.0:8000 --access-logfile - django_eisenhower.wsgi
     volumes:
       - ./django:/code  # instead of copied sources (see Dockerfile) mount development repo
   pgadmin:

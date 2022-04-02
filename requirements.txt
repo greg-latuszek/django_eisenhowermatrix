@@ -6,3 +6,4 @@ django-filter
 # django-celery-email
 psycopg2>=2.8
 pre-commit
+gunicorn
