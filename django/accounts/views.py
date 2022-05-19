@@ -1,16 +1,18 @@
+from rest_framework import viewsets
+from rest_framework.permissions import IsAuthenticated
+
+from django.contrib.auth.models import User
 from django.urls import reverse_lazy
 from django.views import generic
-from rest_framework import viewsets
-from django.contrib.auth.models import User
-from rest_framework.permissions import IsAuthenticated
+
 from .forms import NewUserForm
 from .serializers import UserSerializer
 
 
 class SignUpView(generic.CreateView):
     form_class = NewUserForm
-    success_url = reverse_lazy('login')
-    template_name = 'registration/signup.html'
+    success_url = reverse_lazy("login")
+    template_name = "registration/signup.html"
 
 
 # DRF

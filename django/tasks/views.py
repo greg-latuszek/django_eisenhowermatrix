@@ -1,9 +1,10 @@
-from django.shortcuts import render, redirect
 from rest_framework import viewsets
 from rest_framework.permissions import IsAuthenticated
 
-from .models import Task
+from django.shortcuts import redirect, render
+
 from .forms import TaskForm
+from .models import Task
 from .serializers import TaskSerializer
 
 
@@ -12,7 +13,7 @@ def index(request):
 
     form = TaskForm()
 
-    if request.method == 'POST':
+    if request.method == "POST":
         form = TaskForm(request.POST)
         if form.is_valid():
             # print(dir(form))
@@ -22,11 +23,11 @@ def index(request):
         else:
             print(form.errors)
         view_variant = request.POST["view_variant"]  # preserve presentation layout
-        return redirect(f'/?view={view_variant}')
+        return redirect(f"/?view={view_variant}")
 
-    view_variant = request.GET.get('view', 'table')
-    context = {'tasks': tasks, 'form': form, 'view': view_variant}
-    return render(request, 'tasks/list.html', context)
+    view_variant = request.GET.get("view", "table")
+    context = {"tasks": tasks, "form": form, "view": view_variant}
+    return render(request, "tasks/list.html", context)
 
 
 def update_task(request, pk):
@@ -38,10 +39,10 @@ def update_task(request, pk):
         form = TaskForm(request.POST, instance=task)
         if form.is_valid():
             form.save()
-        return redirect('/')
+        return redirect("/")
 
-    context = {'form': form}
-    return render(request, 'tasks/update_task.html', context)
+    context = {"form": form}
+    return render(request, "tasks/update_task.html", context)
 
 
 def delete_task(request, pk):
@@ -49,10 +50,10 @@ def delete_task(request, pk):
 
     if request.method == "POST":
         item.delete()
-        return redirect('/')
+        return redirect("/")
 
-    context = {'item': item}
-    return render(request, 'tasks/delete.html', context)
+    context = {"item": item}
+    return render(request, "tasks/delete.html", context)
 
 
 # Celery
@@ -60,7 +61,7 @@ def show_primes(request, x):
     from .tasks import print_primes
 
     print_primes.delay(x)
-    return redirect('/')
+    return redirect("/")
 
 
 # DRF

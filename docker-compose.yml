@@ -2,6 +2,8 @@ version: "3.9"
 volumes:
   postgres_data:
     driver: local
+  web:
+    driver: local
 secrets:
   db_login:
     file: ./db_login.txt
@@ -29,6 +31,7 @@ services:
       - ALLOWED_HOSTS  # values will come from .env
       - CELERY_BROKER_URL
       - DJANGO_SUPERUSER_EMAIL
+      - SECRET_KEY
       - EMAIL_HOST
       - EMAIL_PORT
       - EMAIL_HOST_USER
@@ -65,7 +68,11 @@ services:
     depends_on:
       - broker
   nginx:
-    build: ./nginx
+    build:
+      context: .
+      dockerfile: ./nginx/Dockerfile
+    volumes:
+      - web:/www
     ports:
       - "8007:80"
     depends_on:
